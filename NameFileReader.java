@@ -13,7 +13,7 @@ public class NameFileReader {
     private ReadingMode readingMode;
 
     private enum ReadingMode {
-        NAMES, DISREQUESTS, REQUESTS
+        NAMES, DISREQUESTS, REQUESTS, PRIORITY;
     }
 
     public NameFileReader(String filename) {
@@ -34,6 +34,7 @@ public class NameFileReader {
                 if (line.equals("NAMES")) {readingMode = ReadingMode.NAMES;}
                 else if (line.equals("DISREQUESTS")) {readingMode = ReadingMode.DISREQUESTS;}
                 else if (line.equals("REQUESTS")) {readingMode = ReadingMode.REQUESTS;}
+                else if (line.equals("PRIORITY")) {readingMode = ReadingMode.PRIORITY;}
                 else {
                     if (readingMode == null) {
                         throw new IOException("Cannot understand line: '" + line + "'");
@@ -68,6 +69,13 @@ public class NameFileReader {
                         }
 
                         break;
+                   case PRIORITY:
+                        String[] priority = line.split("->");
+                        Participant p = participants.get(priority[0].trim());
+                        if (p == null) {
+                            throw new IOException("Unknown name encountered in priority");
+                        }
+                        p.setPriority(Integer.parseInt(priority[1].trim()));
                     }
                 }
             }

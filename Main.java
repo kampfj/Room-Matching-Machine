@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.*;
 
 public class Main {
     
@@ -8,13 +9,20 @@ public class Main {
         // This is the number of rooms that will be constructed. Feel free to 
         // change this, it's currently set to a number assuming each participnat is 
         // placed in a room. 
+ 
         int numRooms = participants.size() / Integer.parseInt(args[2]);
+        List<Participant> mysteryMan = new ArrayList<>(participants);
         if (args[1].equals("preferences")) {
             ConstructRooms finalRooms = new ConstructRooms(participants, 
                                     numRooms);
             for (Room room : finalRooms.res) {
                 System.out.println(room);
+                for (Participant p : room.roommates) {
+                    mysteryMan.remove(p);
+                }
             }
+            System.out.println(mysteryMan.get(0));
+            
         } else {
             NoPreferences pref = new NoPreferences(participants, numRooms, 
                                             Integer.parseInt(args[2]));
@@ -22,6 +30,9 @@ public class Main {
                 System.out.println(room);
             }
         }
+      
+        
+      
         
         
     }

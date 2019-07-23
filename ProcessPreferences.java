@@ -27,7 +27,7 @@ public class ProcessPreferences {
         stillAvailable = new ArrayList<>(participants);
         noRequests = new ArrayList<>();
         haveRequests = new ArrayList<>();
-        maxBehavior = 10;
+        maxBehavior = 11;
         this.maxNumberOfRooms = maxNumberOfRooms;
     }
     
@@ -111,6 +111,7 @@ public class ProcessPreferences {
         
     }
     
+ 
     
     // If any person in the group disrequested any other person in the group, 
     // this group CANNOT be together. We can maket this check by brute force
@@ -240,26 +241,39 @@ public class ProcessPreferences {
     public void accommodateRemainingRequests(List<Participant> remaining, List<Room> rooms) {
         int count = remaining.size();
             for (Participant p : remaining) {
-                if (p.getPreferences().size() > 0) {
-                    Participant topChoice = p.getPreferences().get(0);
-                    if (topChoice.isAvailable()) {
-                        rooms.add(new Room(p, topChoice, 3));
-                        stillAvailable.remove(p);
-                        stillAvailable.remove(topChoice);
-                        p.noLongerAvailable();
-                        topChoice.noLongerAvailable();
-                        p.getPreferences().remove(topChoice);
-       
-                        count--; 
-                        if (remaining.contains(topChoice)) count--;
-                        if (noRequests.contains(topChoice)) noRequests.remove(topChoice);
-                        
-                        // If we've done all we can do in this loop
-                        if (rooms.size() == maxNumberOfRooms || count <= 0) {
-                            for (Participant participant : remaining) {
-                                if (!participant.getName().equals(p.getName())) noRequests.add(participant);
+                if (p.isAvailable()) {
+                    if (p.getPreferences().size() > 0) {
+                        Participant topChoice = p.getPreferences().get(0);
+                        if (topChoice.isAvailable()) {
+                            Room newRoom = new Room(p, topChoice, 3);
+                            rooms.add(newRoom);
+                            stillAvailable.remove(p);
+                            stillAvailable.remove(topChoice);
+                            if (p.getPreferences().size() > 1 && newRoom.willInviteParticipant(p.getPreferences().get(1))) {
+                                Participant secondChoice = p.getPreferences().get(1);
+                                newRoom.addRoommate(secondChoice);
+                                secondChoice.noLongerAvailable();
+                                stillAvailable.remove(secondChoice);
+                                if (remaining.contains(secondChoice)) count--;
+                                if (noRequests.contains(secondChoice)) noRequests.remove(secondChoice);
+                                p.getPreferences().remove(secondChoice);
                             }
-                            break;
+                            
+                            p.noLongerAvailable();
+                            topChoice.noLongerAvailable();
+                            p.getPreferences().remove(topChoice);
+       
+                            count--; 
+                            if (remaining.contains(topChoice)) count--;
+                            if (noRequests.contains(topChoice)) noRequests.remove(topChoice);
+                        
+                            // If we've done all we can do in this loop
+                            if (rooms.size() == maxNumberOfRooms || count <= 0) {
+                                for (Participant participant : remaining) {
+                                    if (!participant.getName().equals(p.getName())) noRequests.add(participant);
+                                }
+                                break;
+                            }
                         }
                     }
                 }
@@ -288,3 +302,4 @@ public class ProcessPreferences {
     
 
 }
+
