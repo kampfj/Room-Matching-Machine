@@ -1,6 +1,6 @@
 # Room Forming Machine
 
-A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member of Achva West (Red Bus vibes..). Preference-based rooming currently supports three-person rooms.  
+A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member of Achva West Coast Tour and used to fast track room-construction process while accommodating participant requests. Note: preference-based rooming currently only supports three-person rooms.  
 
 ## Use
 
@@ -23,7 +23,7 @@ A Java tool for constructing preference-based or randomized room assignments for
     ```
 Priority (the lower the better) is linked with conduct in rooms and politeness to guests - the algorithm won't construct a room with too high of a cumulative priority to avoid bothering fellow travelers in hotels (this is of course editable). 
 
-2. Open Terminal
+2. Open `Terminal`
 
 3. Navigate to project directory (be sure to place `names.txt` in same folder. 
 
