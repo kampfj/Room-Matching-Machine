@@ -1,4 +1,4 @@
-# Room Forming Machine
+# Room Matching Machine
 
 A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member of Achva West Coast Tour and used to fast track room-construction process while accommodating participant requests. Note: preference-based rooming currently only supports three-person rooms.  
 
