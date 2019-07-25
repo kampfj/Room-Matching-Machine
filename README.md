@@ -10,6 +10,7 @@ A Java tool for constructing preference-based or randomized room assignments for
     Alice Brown
     Bob White
     Carol Green
+    John Jacob Jingle Heimer Schmidt
 
     DISREQUESTS
     Alice Brown -> Bob White       # Alice does not want to room with Bob
@@ -20,8 +21,13 @@ A Java tool for constructing preference-based or randomized room assignments for
     PRIORITY
     Carol Green -> 1
     Bob White -> 2
+    
+    MUST-ROOM
+    John Jacob Jingle Heimer Schmidt, Carol Green, Alice Brown  # this (for some reason or another) must be a room, and  
+                                                                # this pairing is guaranteed by the algorithm before 
+                                                                # preferences come into play 
     ```
-Priority (the lower the better) is linked with conduct in rooms and politeness to guests - the algorithm won't construct a room with too high of a cumulative priority to avoid bothering fellow travelers in hotels (this is of course editable). 
+Priority can be used in two ways: to give some participants a better chance of getting their requests by giving them a higher priority (the algorithm sorts participants in descending order of priority to give those with higher priority first dibs on their top choices). It can also be used to prevent exceedingly loud or impolite rooms - the algorithm won't construct a room with too high of a cumulative priority to avoid bothering fellow travelers in hotels (this is of course editable). 
 
 2. Open `Terminal`
 
