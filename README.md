@@ -10,7 +10,6 @@ A Java tool for constructing preference-based or randomized room assignments for
     Alice Brown
     Bob White
     Carol Green
-    John Jacob Jingle Heimer Schmidt
 
     DISREQUESTS
     Alice Brown -> Bob White       # Alice does not want to room with Bob
@@ -23,7 +22,7 @@ A Java tool for constructing preference-based or randomized room assignments for
     Bob White -> 2
     
     MUST-ROOM
-    John Jacob Jingle Heimer Schmidt, Carol Green, Alice Brown  # this (for some reason or another) must be a room, and  
+    Bob White, Carol Green, Alice Brown  # this (for some reason or another) must be a room, and  
                                                                 # this pairing is guaranteed by the algorithm before 
                                                                 # preferences come into play 
     ```
