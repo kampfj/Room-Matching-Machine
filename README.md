@@ -22,7 +22,7 @@ A Java tool for constructing preference-based or randomized room assignments for
     Bob White -> 2
     
     MUST-ROOM
-    Bob White, Carol Green, Alice Brown  # this (for some reason or another) must be a room, and  
+    Bob White, Carol Green, Alice Brown                         # (for some reason or another) this must be a room, and  
                                                                 # this pairing is guaranteed by the algorithm before 
                                                                 # preferences come into play 
     ```
