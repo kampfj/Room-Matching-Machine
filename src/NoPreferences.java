@@ -14,7 +14,7 @@ public class NoPreferences extends ProcessPreferences {
     //                          2) if they don't hate each other and aren't gonna make a ton of noise, make them a room. 
 
     public NoPreferences(List<Participant> participants, int maxNumberOfRooms, int roommates) {
-        super(participants, maxNumberOfRooms);
+        super(new ArrayList<>(), participants, maxNumberOfRooms);
         //myParticipants = new ArrayList<>();
         rooms = new ArrayList<>();
         if (roommates == 2) {

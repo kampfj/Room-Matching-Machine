@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -22,9 +23,14 @@ public class ProcessPreferences {
     // the guests will be upset!
     static int maxBehavior;
     
-    public ProcessPreferences(List<Participant> participants, int maxNumberOfRooms) {
+    public ProcessPreferences(List<Room> firstRooms, List<Participant> participants, int maxNumberOfRooms) {
         this.participants = participants;
         stillAvailable = new ArrayList<>(participants);
+        for (Room room : firstRooms) {
+            for (Participant p : room.roommates) {
+                stillAvailable.remove(p);
+            }
+        }
         noRequests = new ArrayList<>();
         haveRequests = new ArrayList<>();
         maxBehavior = 11;
@@ -239,6 +245,7 @@ public class ProcessPreferences {
     }
     
     public void accommodateRemainingRequests(List<Participant> remaining, List<Room> rooms) {
+        remaining.sort((p1, p2) -> p2.getPriority() - p1.getPriority());
         int count = remaining.size();
             for (Participant p : remaining) {
                 if (p.isAvailable()) {
@@ -269,11 +276,18 @@ public class ProcessPreferences {
                         
                             // If we've done all we can do in this loop
                             if (rooms.size() == maxNumberOfRooms || count <= 0) {
-                                for (Participant participant : remaining) {
-                                    if (!participant.getName().equals(p.getName())) noRequests.add(participant);
-                                }
                                 break;
                             }
+                        } else if (p.getPreferences().size() > 1 && p.getPreferences().get(1).isAvailable()) {
+                            Participant secondChoice = p.getPreferences().get(1);
+                            Room newRoom = new Room(p, secondChoice, 3);
+                            rooms.add(newRoom);
+                            secondChoice.noLongerAvailable();
+                            stillAvailable.remove(p);
+                            stillAvailable.remove(secondChoice);
+                            if (remaining.contains(secondChoice)) count--;
+                            if (noRequests.contains(secondChoice)) noRequests.remove(secondChoice);
+                            p.getPreferences().remove(secondChoice);
                         }
                     }
                 }
@@ -289,6 +303,7 @@ public class ProcessPreferences {
         
         
         // Now we fill the rest of the rooms to make sure we end up with a complete set. 
+        stillAvailable.sort((p1, p2) -> p2.getDisrequests().size() - p1.getDisrequests().size());
         for (Participant participant : stillAvailable) {
             for (Room room : rooms) {
                 if (room.willInviteParticipant(participant)) {

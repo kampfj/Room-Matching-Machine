@@ -4,24 +4,21 @@ import java.util.*;
 public class Main {
     
     public static void main(String[] args) {
-
-        List<Participant> participants = new NameFileReader(args[0]).getParticipants();
+        
+        NameFileReader reader = new NameFileReader(args[0]);
+        List<Participant> participants = reader.getParticipants();
         // This is the number of rooms that will be constructed. Feel free to 
         // change this, it's currently set to a number assuming each participnat is 
         // placed in a room. 
  
         int numRooms = participants.size() / Integer.parseInt(args[2]);
-        List<Participant> mysteryMan = new ArrayList<>(participants);
         if (args[1].equals("preferences")) {
-            ConstructRooms finalRooms = new ConstructRooms(participants, 
-                                    numRooms);
+            ConstructRooms finalRooms = new ConstructRooms(reader.firstRooms, 
+                                participants, numRooms);
             for (Room room : finalRooms.res) {
                 System.out.println(room);
-                for (Participant p : room.roommates) {
-                    mysteryMan.remove(p);
-                }
             }
-            System.out.println(mysteryMan.get(0));
+            
             
         } else {
             NoPreferences pref = new NoPreferences(participants, numRooms, 

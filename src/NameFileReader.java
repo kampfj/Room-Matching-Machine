@@ -11,12 +11,15 @@ public class NameFileReader {
     private String filename;
     private Map<String, Participant> participants;
     private ReadingMode readingMode;
+    // This will store all of the must-rooms that we have from the get-go
+    List<Room> firstRooms;
 
     private enum ReadingMode {
-        NAMES, DISREQUESTS, REQUESTS, PRIORITY;
+        NAMES, DISREQUESTS, REQUESTS, MUST_ROOM, PRIORITY;
     }
 
     public NameFileReader(String filename) {
+        firstRooms = new ArrayList<>();
         this.filename = filename;
         this.participants = new HashMap<String, Participant>();
         this.read();
@@ -35,6 +38,7 @@ public class NameFileReader {
                 else if (line.equals("DISREQUESTS")) {readingMode = ReadingMode.DISREQUESTS;}
                 else if (line.equals("REQUESTS")) {readingMode = ReadingMode.REQUESTS;}
                 else if (line.equals("PRIORITY")) {readingMode = ReadingMode.PRIORITY;}
+                else if (line.equals("MUST")) {readingMode = ReadingMode.MUST_ROOM;}
                 else {
                     if (readingMode == null) {
                         throw new IOException("Cannot understand line: '" + line + "'");
@@ -76,7 +80,15 @@ public class NameFileReader {
                             throw new IOException("Unknown name encountered in priority");
                         }
                         p.setPriority(Integer.parseInt(priority[1].trim()));
+                        break;
+                    case MUST_ROOM: 
+                        String[] mates = line.split(",");
+                        Participant first = participants.get(mates[0].trim()), second = participants.get(mates[1].trim()), 
+                                                                        third = participants.get(mates[2].trim());
+                        firstRooms.add(new Room(new Participant[] {first, second, third}));
                     }
+                        
+                        
                 }
             }
         } catch (IOException e) {

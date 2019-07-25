@@ -10,9 +10,10 @@ public class ConstructRooms {
     int maxNumberOfRooms;
     
     
-    public ConstructRooms(List<Participant> participants, int maxNumberOfRooms) {
+    public ConstructRooms(List<Room> firstRooms, List<Participant> participants, int maxNumberOfRooms) {
         res = new ArrayList<>();
-        pref = new ProcessPreferences(participants, maxNumberOfRooms);
+        res.addAll(firstRooms);
+        pref = new ProcessPreferences(firstRooms, participants, maxNumberOfRooms);
         organizeList(pref);
         initialMatches(pref);
         pref.satisfyMutualRequests(res);
