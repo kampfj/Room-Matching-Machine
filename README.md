@@ -10,6 +10,8 @@ Notes:
        
        - all that matters for randomized construction is that the correct names are under "NAMES" in 'names.txt'. Beyond that, you can put 
        whatever you want in the file
+       
+       - for randomized room construction, the following property must hold: #participants % #rooms = 0
 
 ## Use
 
