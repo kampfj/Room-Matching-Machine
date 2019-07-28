@@ -30,7 +30,7 @@ Priority can be used in two ways: to give some participants a better chance of g
 
 2. Open `Terminal`
 
-3. Navigate to project directory (be sure to place `names.txt` in same folder. 
+3. Navigate to project directory (be sure to place `names.txt` in same folder). 
 
 4. run `javac *.java` to compile the project
 
