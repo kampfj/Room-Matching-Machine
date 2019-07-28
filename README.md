@@ -20,8 +20,13 @@ A Java tool for constructing preference-based or randomized room assignments for
     PRIORITY
     Carol Green -> 1
     Bob White -> 2
+    
+    MUST-ROOM
+    Bob White, Carol Green, Alice Brown                         # (for some reason or another) this must be a room, and  
+                                                                # this pairing is guaranteed by the algorithm before 
+                                                                # preferences come into play 
     ```
-Priority (the lower the better) is linked with conduct in rooms and politeness to guests - the algorithm won't construct a room with too high of a cumulative priority to avoid bothering fellow travelers in hotels (this is of course editable). 
+Priority can be used in two ways: to give some participants a better chance of getting their requests by giving them a higher priority (the algorithm sorts participants in descending order of priority to give those with higher priority first dibs on their top choices). It can also be used to prevent exceedingly loud or impolite rooms - the algorithm won't construct a room with too high of a cumulative priority to avoid bothering fellow travelers in hotels (this is of course editable). 
 
 2. Open `Terminal`
 
