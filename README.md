@@ -1,6 +1,6 @@
 # Room Matching Machine
 
-A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member of Achva West Coast Tour and used to fast track room-construction process while accommodating participant requests. 
+A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member for Achva West Coast Summer Tour and used to fast track room-construction process while accommodating participant requests. 
 
 Notes: 
 
