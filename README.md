@@ -8,7 +8,7 @@ Notes:
 
        - randomized rooming takes into account disrequests (participants who can't share a room under any circumstances)
        
-       - all that matters for randomized construction is that the correct names are in 'names.txt'. Beyond that, you can put 
+       - all that matters for randomized construction is that the correct names are under "NAMES" in 'names.txt'. Beyond that, you can put 
        whatever you want in the file
 
 ## Use
