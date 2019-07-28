@@ -12,6 +12,8 @@ public class Main {
         // placed in a room. 
  
         int numRooms = participants.size() / Integer.parseInt(args[2]);
+        System.out.println(participants.size());
+        System.out.println(numRooms);
         if (args[1].equals("preferences")) {
             ConstructRooms finalRooms = new ConstructRooms(reader.firstRooms, 
                                 participants, numRooms);
@@ -21,11 +23,15 @@ public class Main {
             
             
         } else {
-            NoPreferences pref = new NoPreferences(participants, numRooms, 
-                                            Integer.parseInt(args[2]));
-            for (Room room : pref.getRooms()) {
-                System.out.println(room);
-            }
+            
+                NoPreferences pref = new NoPreferences(participants, numRooms, 
+                        Integer.parseInt(args[2]));
+                for (Room room : pref.getRooms()) {
+                    System.out.println(room);
+                }
+            
+            
+            
         }
       
         

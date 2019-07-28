@@ -101,5 +101,9 @@ public class NameFileReader {
     public List<Participant> getParticipants() {
         return new ArrayList<Participant>(participants.values());
     }
+    
+    public Participant getParticipant(String participant) {
+        return participants.get(participant.trim());
+    }
 
 }
