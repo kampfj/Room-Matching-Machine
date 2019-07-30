@@ -52,9 +52,9 @@ public class ProcessPreferences {
     // time complexity O(n^2)
     public List<Participant[]> getDuos() {
         List<Participant[]> duos = new ArrayList<>();
-        for (int i = 0; i < haveRequests.size() - 1; i++) {
-            for (int j = i + 1; j < haveRequests.size(); j++) {
-                duos.add(new Participant[] {haveRequests.get(i), haveRequests.get(j)});
+        for (int i = 0; i < participants.size() - 1; i++) {
+            for (int j = i + 1; j < participants.size(); j++) {
+                duos.add(new Participant[] {participants.get(i), participants.get(j)});
             }
         }
         return duos;
@@ -63,12 +63,12 @@ public class ProcessPreferences {
     // Getting all three combinations of participants who HaveRequests, to be used later 
     public List<Participant[]> getTrios() {
         List<Participant[]> trios = new ArrayList<>();
-        for (int i = 0; i < haveRequests.size() - 2; i++) {
-            for (int j = i + 1; j < haveRequests.size() - 1; j++) {
-                for (int k = j + 1; k < haveRequests.size(); k++) {
-                    Participant first = haveRequests.get(i);
-                    Participant second = haveRequests.get(j);
-                    Participant third = haveRequests.get(k);
+        for (int i = 0; i < participants.size() - 2; i++) {
+            for (int j = i + 1; j < participants.size() - 1; j++) {
+                for (int k = j + 1; k < participants.size(); k++) {
+                    Participant first = participants.get(i);
+                    Participant second = participants.get(j);
+                    Participant third = participants.get(k);
                     trios.add(new Participant[] {first, second, third});
                 }
             }
@@ -117,6 +117,20 @@ public class ProcessPreferences {
         
     }
     
+    
+    // Checks if there are a cray amount of cycles here, i.e. a bunch of people
+    // circularly requesting each other in a given group. 
+    public boolean groupClearMatch(Participant [] group) {
+        
+        Participant p = group[0], p1 = group[1], p2 = group[2];
+        boolean first = p.getPreferences().contains(p1) && p.getPreferences().contains(p2);
+        boolean second = p1.getPreferences().contains(p) && p1.getPreferences().contains(p2);
+        boolean third = p2.getPreferences().contains(p) && p2.getPreferences().contains(p1);
+        return (!groupContainsDisrequest(group) && (!hasUnavailable(group)) && 
+                ((first && second) || (first && third) || (second && third)));
+        
+    }
+    
  
     
     // If any person in the group disrequested any other person in the group, 
@@ -154,6 +168,7 @@ public class ProcessPreferences {
     }
     
     
+    
     // If anyone in the input array is ALREADY taken, return TRUE i.e. this group cannot room
     // together. 
     public boolean hasUnavailable(Participant[] group) {
@@ -174,45 +189,60 @@ public class ProcessPreferences {
         List<Participant[]> trios = getTrios();
         List<Room> initialRooms = new ArrayList<>();
         for (Participant[] group : trios) {
+            if (groupClearMatch(group)) {
+                addAndUpdateLists(group, initialRooms);
+            }
+        }
+        for (Participant[] group : trios) {
             
             if (groupVibes(group)) {
+                addAndUpdateLists(group, initialRooms);
                 
-                // Make a new room
-                Room roomVibes = new Room(group);
-                initialRooms.add(roomVibes);
-                
-                for (Participant p : group) {
-                    
-                    // Remove participant from our list and remove him 
-                    // from the preference lists of others
-                    
-                    // We have to remove them after the loop so as to avoid
-                    // a ConcurrentModificationException, so we store 
-                    // temporarily in this list toRemove
-                    List<Participant> toRemove = new ArrayList<>();
-                    
-                    for (Participant kid : haveRequests) {
-                        if (kid.getPreferences().contains(p)) {
-                            kid.removePreference(p);
-                            if (kid.getPreferences().size() == 0) {
-                                toRemove.add(kid);
-                                noRequests.add(kid);
-                            }
-                        }
-                    }
-                    
-                    for (Participant remove : toRemove) {
-                        haveRequests.remove(remove);
-                    }
-                    
-                    p.noLongerAvailable();
-                    stillAvailable.remove(p);
-                    haveRequests.remove(p);
-                }
             }
         }
         
         return initialRooms;
+    }
+    
+    
+    // Remove participant from our list and remove him 
+    // from the preference lists of others
+    
+    // We have to remove them after the loop so as to avoid
+    // a ConcurrentModificationException, so we store 
+    // temporarily in this list toRemove
+    public void addAndUpdateLists(Participant[] group, List<Room> rooms) {
+        Room roomVibes = new Room(group);
+        rooms.add(roomVibes);
+        
+        for (Participant p : group) {
+            
+            // Remove participant from our list and remove him 
+            // from the preference lists of others
+            
+            // We have to remove them after the loop so as to avoid
+            // a ConcurrentModificationException, so we store 
+            // temporarily in this list toRemove
+            List<Participant> toRemove = new ArrayList<>();
+            
+            for (Participant kid : haveRequests) {
+                if (kid.getPreferences().contains(p)) {
+                    kid.removePreference(p);
+                    if (kid.getPreferences().size() == 0) {
+                        toRemove.add(kid);
+                        noRequests.add(kid);
+                    }
+                }
+            }
+            
+            for (Participant remove : toRemove) {
+                haveRequests.remove(remove);
+            }
+            
+            p.noLongerAvailable();
+            stillAvailable.remove(p);
+            haveRequests.remove(p);
+        }
     }
     
     

@@ -40,7 +40,7 @@ public class NameFileReader {
                 else if (line.equals("DISREQUESTS")) {readingMode = ReadingMode.DISREQUESTS;}
                 else if (line.equals("REQUESTS")) {readingMode = ReadingMode.REQUESTS;}
                 else if (line.equals("PRIORITY")) {readingMode = ReadingMode.PRIORITY;}
-                else if (line.equals("MUST")) {readingMode = ReadingMode.MUST_ROOM;}
+                else if (line.equals("MUST-ROOM")) {readingMode = ReadingMode.MUST_ROOM;}
                 else {
                     if (readingMode == null) {
                         throw new IOException("Cannot understand line: '" + line + "'");
