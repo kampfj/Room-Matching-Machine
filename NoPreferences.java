@@ -15,10 +15,15 @@ public class NoPreferences extends ProcessPreferences {
 
     public NoPreferences(List<Participant> participants, int maxNumberOfRooms, int roommates) {
         super(new ArrayList<>(), participants, maxNumberOfRooms);
-        //myParticipants = new ArrayList<>();
         rooms = new ArrayList<>();
         if (roommates == 2) {
             while (!participants.isEmpty()) {
+                if (participants.size() < 3) {
+                    Room last = new Room(new Participant[] {participants.get(0)});
+                    rooms.add(last);
+                    if (participants.size() == 2) last.addRoommate(participants.get(1));
+                    break;
+                } 
                 Integer[] indices = twoInRange();
                 Participant p = participants.get(indices[0]);
                 Participant p1 = participants.get(indices[1]);
@@ -32,6 +37,17 @@ public class NoPreferences extends ProcessPreferences {
         }
         if (roommates == 3) {
             while (!participants.isEmpty()) {
+                if (participants.size() < 4) {
+                    Room last = new Room(new Participant[] {participants.get(0)});
+                    participants.remove(participants.get(0));
+                    while (!participants.isEmpty()) {
+                       last.addRoommate(participants.get(0));
+                       participants.remove(0);
+                    }
+                    rooms.add(last); 
+                    break;
+                    
+                }
                 Integer[] indices = threeInRange();
                 Participant p = participants.get(indices[0]);
                 Participant p1 = participants.get(indices[1]);
