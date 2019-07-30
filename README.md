@@ -1,6 +1,17 @@
 # Room Matching Machine
 
-A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member of Achva West Coast Tour and used to fast track room-construction process while accommodating participant requests. Note: preference-based rooming currently only supports three-person rooms.  
+A Java tool for constructing preference-based or randomized room assignments for students/campers/scouts when on an vacation/field trip/overnight. Originally written as staff member for Achva West Coast Summer Tour and used to fast track room-construction process while accommodating participant requests. 
+
+Notes: 
+
+       - preference-based rooming currently only supports three-person rooms
+
+       - randomized rooming takes into account disrequests (participants who can't share a room under any circumstances)
+       
+       - all that matters for randomized construction is that the correct names are under "NAMES" in 'names.txt'. Beyond that, you can put 
+       whatever you want in the file
+       
+       - for randomized room construction, the following property must hold: #participants % #rooms = 0
 
 ## Use
 
@@ -30,7 +41,7 @@ Priority can be used in two ways: to give some participants a better chance of g
 
 2. Open `Terminal`
 
-3. Navigate to project directory (be sure to place `names.txt` in same folder. 
+3. Navigate to project directory (be sure to place `names.txt` in same folder). 
 
 4. run `javac *.java` to compile the project
 
