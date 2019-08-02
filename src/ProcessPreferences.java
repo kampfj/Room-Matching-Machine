@@ -117,6 +117,16 @@ public class ProcessPreferences {
         
     }
     
+
+    // Checks if this is a clear chain 
+    public boolean groupIsChain(Participant[] group) {
+        Participant p = group[0], p1 = group[1], p2 = group[2];
+        boolean first = p.getPreferences().contains(p1) && p.getPreferences().contains(p2);
+        boolean second = p1.getPreferences().contains(p) && p1.getPreferences().contains(p2);
+        boolean third = p2.getPreferences().contains(p) && p2.getPreferences().contains(p1);
+        return !groupContainsDisrequest(group) && (!hasUnavailable(group)) && first && second && third;
+                
+    }
     
     // Checks if there are a cray amount of cycles here, i.e. a bunch of people
     // circularly requesting each other in a given group. 
@@ -188,6 +198,11 @@ public class ProcessPreferences {
     public List<Room> constructClearMatches() {
         List<Participant[]> trios = getTrios();
         List<Room> initialRooms = new ArrayList<>();
+        for (Participant[] group : trios) {
+            if (groupIsChain(group)) {
+                addAndUpdateLists(group, initialRooms);
+            }
+        }
         for (Participant[] group : trios) {
             if (groupClearMatch(group)) {
                 addAndUpdateLists(group, initialRooms);
