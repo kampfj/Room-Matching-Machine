@@ -172,6 +172,21 @@ public class ProcessPreferences {
                         group[3].getDisrequests().contains(group[2]);
             return firstMad || secondMad || thirdMad || fourthMad;
     
+        } else {
+            boolean firstMad = group[0].getDisrequests().contains(group[1]) || 
+                    group[0].getDisrequests().contains(group[2]) || group[0].getDisrequests().contains(group[3]) || 
+                    group[0].getDisrequests().contains(group[4]);
+            boolean secondMad = group[1].getDisrequests().contains(group[0]) || 
+                    group[1].getDisrequests().contains(group[2]) || group[1].getDisrequests().contains(group[3]) ||
+                    group[1].getDisrequests().contains(group[4]);;
+            boolean thirdMad = group[2].getDisrequests().contains(group[0]) || 
+                    group[2].getDisrequests().contains(group[1]) || group[2].getDisrequests().contains(group[3]) || 
+                    group[2].getDisrequests().contains(group[4]);
+            boolean fourthMad = group[3].getDisrequests().contains(group[0]) || group[3].getDisrequests().contains(group[1]) || 
+                        group[3].getDisrequests().contains(group[2]) || group[3].getDisrequests().contains(group[4]);
+            boolean fifthMad = group[4].getDisrequests().contains(group[0]) || group[4].getDisrequests().contains(group[1]) ||
+                    group[4].getDisrequests().contains(group[2]) || group[4].getDisrequests().contains(group[3]);
+            return firstMad || secondMad || thirdMad || fourthMad || fifthMad;
         }
         
         return false;

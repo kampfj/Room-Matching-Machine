@@ -37,7 +37,7 @@ public class NoPreferences extends ProcessPreferences {
         }
         if (roommates == 3) {
             while (!participants.isEmpty()) {
-                if (participants.size() < 4) {
+                if (participants.size() < 3) {
                     Room last = new Room(new Participant[] {participants.get(0)});
                     participants.remove(participants.get(0));
                     while (!participants.isEmpty()) {
@@ -60,8 +60,19 @@ public class NoPreferences extends ProcessPreferences {
                     participants.remove(p2);
                 }
             }
-        } else  {
+        } if (roommates == 4)  {
             while (!participants.isEmpty()) {
+                if (participants.size() < 4) {
+                    Room last = new Room(new Participant[] {participants.get(0)});
+                    participants.remove(participants.get(0));
+                    while (!participants.isEmpty()) {
+                       last.addRoommate(participants.get(0));
+                       participants.remove(0);
+                    }
+                    rooms.add(last); 
+                    break;
+                    
+                }
                 Integer[] indices = fourInRange();
                 Participant p = participants.get(indices[0]);
                 Participant p1 = participants.get(indices[1]);
@@ -74,6 +85,36 @@ public class NoPreferences extends ProcessPreferences {
                     participants.remove(p1);
                     participants.remove(p2);
                     participants.remove(p3);
+                } 
+            }
+        }
+        else {
+            while (!participants.isEmpty()) {
+                if (participants.size() < 5) {
+                    Room last = new Room(new Participant[] {participants.get(0)});
+                    participants.remove(participants.get(0));
+                    while (!participants.isEmpty()) {
+                       last.addRoommate(participants.get(0));
+                       participants.remove(0);
+                    }
+                    rooms.add(last); 
+                    break;
+                    
+                }
+                Integer[] indices = fiveInRange();
+                Participant p = participants.get(indices[0]);
+                Participant p1 = participants.get(indices[1]);
+                Participant p2 = participants.get(indices[2]);
+                Participant p3 = participants.get(indices[3]);
+                Participant p4 = participants.get(indices[4]);
+                Participant[] group = new Participant[] {p, p1, p2, p3, p4};
+                if (!groupContainsDisrequest(group)) {
+                    rooms.add(new Room(group));
+                    participants.remove(p);
+                    participants.remove(p1);
+                    participants.remove(p2);
+                    participants.remove(p3);
+                    participants.remove(p4);
                 } 
             }
         }
@@ -132,6 +173,32 @@ public class NoPreferences extends ProcessPreferences {
         }
         
         return new Integer[] {r1, r2, r3, r4};
+    }
+
+    public Integer[] fiveInRange() {
+        int r1 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        int r2 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        int r3 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        int r4 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        int r5 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        while (r1 == r2 || r1 == r3 || r1 == r4 || r1 == r5) {
+            r1 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        }
+        while (r2 == r1 || r2 == r3 || r2 == r4 || r2 == r5) {
+            r2 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        }
+        while (r3 == r1 || r3 == r2 || r3 == r4 || r3 == r5) {
+            r3 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        }
+        while (r4 == r1 || r4 == r2 || r4 == r3 || r4 == r5) {
+            r4 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        }
+
+        while (r5 == r1 || r5 == r2 || r5 == r3 || r5 == r4) {
+            r5 = ThreadLocalRandom.current().nextInt(0, participants.size());
+        }
+        
+        return new Integer[] {r1, r2, r3, r4, r5};
     }
     
     

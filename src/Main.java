@@ -24,11 +24,11 @@ public class Main {
             
         } else {
             
-                NoPreferences pref = new NoPreferences(participants, numRooms, 
-                        Integer.parseInt(args[2]));
-                for (Room room : pref.getRooms()) {
-                    System.out.println(room);
-                }
+            NoPreferences pref = new NoPreferences(participants, numRooms, 
+            Integer.parseInt(args[2]));
+            for (Room room : pref.getRooms()) {
+                System.out.println(room);
+            }
             
             
             
