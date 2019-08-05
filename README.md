@@ -40,7 +40,7 @@ Priority can be used in two ways: to give some participants a better chance of g
 
 2. Open `Terminal`
 
-3. Navigate to project directory (be sure to place `names.txt` in same folder). 
+3. Navigate to project directory `src` (be sure to place `names.txt` in same folder as `.java` files). 
 
 4. run `javac *.java` to compile the project
 
@@ -50,4 +50,4 @@ Priority can be used in two ways: to give some participants a better chance of g
     
  `args[1]`: whether or not you're running preference-based or randomized rooming. This argument should be                "preferences" for preference-based rooms, anything else for randomized.
     
- `args[2]`: the number of roommates desired per room. Should be 3 for preferenced-based, 2/3/4 for randomized. 
+ `args[2]`: the number of roommates desired per room. Should be 3 for preferenced-based, 2/3/4/5 for randomized. 
