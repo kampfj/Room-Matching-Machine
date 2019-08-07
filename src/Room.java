@@ -71,9 +71,7 @@ public class Room {
         if (!p.isAvailable() || notAFit(p)) {
             return false;
         }
-        return 
-       (stillLooking() && behaviorScore() + p.getPriority() <= 
-                                                       ProcessPreferences.maxBehavior);
+        return stillLooking();
         
     }
     

@@ -19,9 +19,6 @@ public class ProcessPreferences {
     // We always want to fill a certain number of rooms
     int maxNumberOfRooms;
     
-    // A given room's cumulative "behavior score" cannot exceed this. Otherwise 
-    // the guests will be upset!
-    static int maxBehavior;
     
     public ProcessPreferences(List<Room> firstRooms, List<Participant> participants, int maxNumberOfRooms) {
         this.participants = participants;
@@ -33,7 +30,6 @@ public class ProcessPreferences {
         }
         noRequests = new ArrayList<>();
         haveRequests = new ArrayList<>();
-        maxBehavior = 11;
         this.maxNumberOfRooms = maxNumberOfRooms;
     }
     
@@ -91,9 +87,6 @@ public class ProcessPreferences {
     // Returns true if the participants in input array are a good fit for a room.
     // I'll only call this function with groups of 2 or 3.
     public boolean groupVibes(Participant[] group) {
-        if (groupBehaviorScore(group) > maxBehavior) {
-            return false;
-        }
         if (groupContainsDisrequest(group) || hasUnavailable(group)) {
             return false;
         }
@@ -172,7 +165,7 @@ public class ProcessPreferences {
                         group[3].getDisrequests().contains(group[2]);
             return firstMad || secondMad || thirdMad || fourthMad;
     
-        } else {
+        } else if (group.length == 5) {
             boolean firstMad = group[0].getDisrequests().contains(group[1]) || 
                     group[0].getDisrequests().contains(group[2]) || group[0].getDisrequests().contains(group[3]) || 
                     group[0].getDisrequests().contains(group[4]);
