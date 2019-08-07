@@ -36,11 +36,11 @@ Notes:
                                                                 # this pairing is guaranteed by the algorithm before 
                                                                 # preferences come into play 
     ```
-Priority can be used in two ways: to give some participants a better chance of getting their requests by giving them a higher priority (the algorithm sorts participants in descending order of priority to give those with higher priority first dibs on their top choices). It can also be used to prevent exceedingly loud or impolite rooms - the algorithm won't construct a room with too high of a cumulative priority to avoid bothering fellow travelers in hotels (this is of course editable). 
+Participant 'priority' simply offers a measurement by which to sort participants: in our algorithm, we give participants who haven't recently gotten their top requests a higher priority score (during roommate matching, the participant list is sorted in descending order of priority, which gives those with higher priority first dibs on their top choices). Priority can also be used to prevent exceedingly loud or impolite rooms to avoid bothering fellow travelers in hotels (for instance, you can give louder participants a higher integer score and make a check to ensure that no rooms exceeding a certain cumulative score are constructed). In other words, the priority aspect is a customizable feature to your needs. 
 
 2. Open `Terminal`
 
-3. Navigate to project directory (be sure to place `names.txt` in same folder). 
+3. Navigate to project directory `src` (be sure to place `names.txt` in same folder as `.java` files). 
 
 4. run `javac *.java` to compile the project
 
@@ -50,4 +50,4 @@ Priority can be used in two ways: to give some participants a better chance of g
     
  `args[1]`: whether or not you're running preference-based or randomized rooming. This argument should be                "preferences" for preference-based rooms, anything else for randomized.
     
- `args[2]`: the number of roommates desired per room. Should be 3 for preferenced-based, 2/3/4 for randomized. 
+ `args[2]`: the number of roommates desired per room. Should be 3 for preferenced-based, 2/3/4/5 for randomized. 
