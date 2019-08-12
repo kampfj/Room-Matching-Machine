@@ -3,10 +3,10 @@
 Consider the following situation: you're a counselor on a summer program with 150 participants, sometimes traveling to up to 3 hotels in a single week. As trip staff, your job is to help the participants have a great time: this entails taking care of logistical issues as well as facilitating relationships and friendships among fellow participants. It's also your job to pair participants in roommate groups throughout your travels. To keep participants happy, you allow them to submit preferences: a list of peers they'd like to room with at a given hotel. Let's consider a group of participants: 
 
 ```
+NAMES
 John Doe
 Jeff Green
 Gordon Fox
-
 ```
 
 Now, there may be overlapping requests: for example, `John Doe` may request `Jeff Green`, while `Gordon Fox` requested Jeff as well. There also may be incongruous requests - what if John requests Jeff, but Jeff doesn't feel the same way? Further, direquests are permitted - John and Gordon may have gotten in a fight, and under no circumstances may they be placed in the same room. 
