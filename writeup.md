@@ -42,7 +42,7 @@ This class parses the input file and constructs our list of participants accordi
 Class containing the definition of what a participant on the program is and has for the purpose of rooming - requests, disrequests, behavioral issues etc. This is foundational to the project.
 
 `Room.java` 
-A wrapper for a list of participants. Super helpful throughout the algorithm because we have functions like stillLooking() and willIInviteParticipant() which make a "list" dynamic and can help us accommodate all participants. 
+A wrapper for a list of participants. Super helpful throughout the algorithm because we have functions like `stillLooking()` and `willIInviteParticipant()` which make a "list" dynamic and can help us accommodate all participants. 
 
 `ProcessPreferences.java`  
 Much of the main work happens in this class. This is where we take in an input list of Participants and really break down the data - we construct obvious matches, check for trios of kids that particularly vibe, and we keep important lists that will help us finish off the rooms. 
