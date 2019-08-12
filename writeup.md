@@ -17,6 +17,41 @@ The problem, at first glance, seems analagous to Gale and Shapley's famed "marri
 
 ## Solution 
 
+The Room Matching Machine does adapt the GS algorithm to finish grouping participants, but first we make checks to clean up our input and construct obvious rooms. For the context in which this project was originally created the input size was known (`n = 150`) and we thus indulge in time-costly operations - for example, we iterate through all combinations of 3 participants and check for chains, where a chain is defined as the following:
 
+```
+John Doe -> Jeff Green
+John Doe -> Gordon Fox 
+
+Jeff Green -> John Doe 
+Jeff Green -> Gordon Fox
+
+Gordon Fox -> John Doe 
+Gordon Fox -> Jeff Green
+```
+Overall, we first deal with chains, pairs of two that mutually request one another, and other groups that vibe together - this part of the algorithm can be found in the `constructInitialMatches` method within the `ProcessPreferences` class, and it does the bulk of our work in making participant happy and constructing sensible initial rooms. 
+
+After this initial process, we have a bunch of rooms that may or may not be full to capacity. We also have participants that weren't included in this initial matching and are still looking for a room - they may or may not have preferences. This is where the `Gale Shapley` part of the algorithm comes into play - we go to each participant and have them 'propose' to their top preference - if he/she is still available, we put them together in a room. After this process is done, we have the remaining unmatched participants kindly ask to join each of the remaining rooms until they are finally let in by a room that's not yet at full capacity. There are often very few participants left unmatched at this point in the algorithm, and they are usually the one who submitted zero preferences.
 
 ## Project Structure
+
+`NameFileReader.java` 
+This class parses the input file and constructs our list of participants accordingly. 
+
+`Participant.java`    
+Class containing the definition of what a participant on the program is and has for the purpose of rooming - requests, disrequests, behavioral issues etc. This is foundational to the project.
+
+`Room.java` 
+A wrapper for a list of participants. Super helpful throughout the algorithm because we have functions like stillLooking() and willIInviteParticipant() which make a "list" dynamic and can help us accommodate all participants. 
+
+`ProcessPreferences.java`  
+Much of the main work happens in this class. This is where we take in an input list of Participants and really break down the data - we construct obvious matches, check for trios of kids that particularly vibe, and we keep important lists that will help us finish off the rooms. 
+
+`NoPreferences.java` extends `ProcessPreferences.java`   
+Randomly constructs rooms in the case where no preferences are allowed but disrequests are still in play. For the original purposes of the project, this was used often when we had short hotel stays for the purpose of faciliating new friendships.
+
+`ConstructRooms.java`
+Takes in our list of participants and uses `ProcessPreferences` to obtain optimal matching.
+
+`Main.java`
+Driver class for the project. 
