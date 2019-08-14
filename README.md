@@ -44,7 +44,7 @@ Participant 'priority' simply offers a measurement by which to sort participants
 
 4. run `javac *.java` to compile the project
 
-5. run `java Main args[0] args[1] args[2]` to run the project
+5. run `java Main args[0] args[1] args[2]` to run the project and enjoy your rooms!
 
 `args[0]`: input file, in our case `names.txt` 
     
