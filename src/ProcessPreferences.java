@@ -320,7 +320,7 @@ public class ProcessPreferences {
                             rooms.add(newRoom);
                             stillAvailable.remove(p);
                             stillAvailable.remove(topChoice);
-                            if (p.getPreferences().size() > 1 && newRoom.willInviteParticipant(p.getPreferences().get(1))) {
+                            if (p.getPreferences().size() > 1 && newRoom.wantsParticipant(p.getPreferences().get(1))) {
                                 Participant secondChoice = p.getPreferences().get(1);
                                 newRoom.addRoommate(secondChoice);
                                 secondChoice.noLongerAvailable();
@@ -370,7 +370,7 @@ public class ProcessPreferences {
         stillAvailable.sort((p1, p2) -> p2.getDisrequests().size() - p1.getDisrequests().size());
         for (Participant participant : stillAvailable) {
             for (Room room : rooms) {
-                if (room.willInviteParticipant(participant)) {
+                if (room.wantsParticipant(participant)) {
                     room.addRoommate(participant);
                     break;
                 }

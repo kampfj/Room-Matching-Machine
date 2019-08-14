@@ -67,7 +67,7 @@ public class Room {
     
     // This is a huge function which will help us during our WHILE loop
     // to match up students with rooms 
-    public boolean willInviteParticipant(Participant p) {
+    public boolean wantsParticipant(Participant p) {
         if (!p.isAvailable() || notAFit(p)) {
             return false;
         }
