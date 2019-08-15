@@ -29,6 +29,8 @@ Jeff Green -> Gordon Fox
 Gordon Fox -> John Doe 
 Gordon Fox -> Jeff Green
 ```
+Chains are fairly common as groups of participants team up to ensure they get the best chance of landing a room together. We definitely want to honor these chains. 
+
 Overall, we first deal with chains, pairs of two that mutually request one another, and other groups that vibe together - this part of the algorithm can be found in the `constructInitialMatches` method within the `ProcessPreferences` class, and it does the bulk of our work in making participant happy and constructing sensible initial rooms. 
 
 After this initial process, we have a bunch of rooms that may or may not be full to capacity. We also have participants that weren't included in this initial matching and are still looking for a room - they may or may not have preferences. This is where the `Gale Shapley` part of the algorithm comes into play - we go to each participant and have them 'propose' to their top preference - if he/she is still available, we put them together in a room. After this process is done, we have the remaining unmatched participants kindly ask to join each of the remaining rooms until they are finally let in by a room that's not yet at full capacity. There are often very few participants left unmatched at this point in the algorithm, and they are usually the one who submitted zero preferences.
