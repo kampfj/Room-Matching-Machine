@@ -50,7 +50,7 @@ A wrapper for a list of participants. Super helpful throughout the algorithm bec
 Much of the main work happens in this class. This is where we take in an input list of Participants and really break down the data - we construct obvious matches, check for trios of kids that particularly vibe, and we keep important lists that will help us finish off the rooms. 
 
 `NoPreferences.java` extends `ProcessPreferences.java`   
-Randomly constructs rooms in the case where no preferences are allowed but disrequests are still in play. For the original purposes of the project, this was used often when we had short hotel stays for the purpose of faciliating new friendships.
+Randomly constructs rooms in the case where no preferences are allowed but disrequests are still in play. For the original purposes of the project, this was used often when we had short hotel stays for the purpose of facilitating new friendships.
 
 `ConstructRooms.java`
 Takes in our list of participants and uses `ProcessPreferences` to obtain optimal matching.
