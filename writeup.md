@@ -41,7 +41,7 @@ After this initial process, we have a bunch of rooms that may or may not be full
 This class parses the input file and constructs our list of participants accordingly. 
 
 `Participant.java`    
-Class containing the definition of what a participant on the program is and has for the purpose of rooming - requests, disrequests, behavioral issues etc. This is foundational to the project.
+Class containing the definition of what a participant on the program is and has for the purpose of rooming - requests, disrequests, behavioral notes etc. This is foundational to the project.
 
 `Room.java` 
 A wrapper for a list of participants. Super helpful throughout the algorithm because we have functions like `stillLooking()` and `willIInviteParticipant()` which make a "list" dynamic and can help us accommodate all participants. 
