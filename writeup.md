@@ -17,7 +17,7 @@ The problem, at first glance, seems analagous to the well-known "marriage proble
 
 ## Solution 
 
-The Room Matching Machine does adapt the GS algorithm to finish grouping participants, but first we make checks to clean up our input and construct obvious rooms. For the context in which this project was originally created the input size was known (`n = 150`) and we thus indulge in time-costly operations - for example, we iterate through all combinations of 3 participants and check for chains, where a chain is defined as a group of three participants where each participant requests every other participant. In our case, the following would be a valid "chain":
+The Room Matching Machine does adapt the GS algorithm to finish grouping participants, but first we make checks to clean up our input and construct obvious rooms. For the context in which this project was originally created the input size was known (`n = 150`) and we thus indulge in time-costly operations - for example, we iterate through all combinations of 3 participants and check for chains, where a chain is defined as a group of three participants where each participant requests every other participant. Given the above list of participants, the following would be a valid "chain":
 
 ```
 John Doe -> Jeff Green
