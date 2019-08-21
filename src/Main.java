@@ -17,8 +17,7 @@ public class Main {
         if (participants.size() % roomCapacity != 0) {
             numRooms++;
         }
-        System.out.println(participants.size());
-        System.out.println(numRooms);
+        System.out.println("There are " + participants.size() + " participants and " + numRooms + " rooms!");
         if (args[1].equals("preferences")) {
             ConstructRooms finalRooms = new ConstructRooms(reader.firstRooms, 
                                 participants, numRooms);
